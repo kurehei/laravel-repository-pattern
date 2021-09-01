@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  # laravel側の設定
+  api:
+    container_name: 'api'
+    # Dockerfileがあるパス
+    build: ./docker/php
+    # volumesは、どこの位置にディレクトリをマウントさせるか決めること
+    volumes:
+      - ./api:/var/www
+    command:
+      bash -c "php artisan serve --host=0.0.0.0 --port=8000"
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./api/.env
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./api:/var/www
+      - ./docker/nginx/default.conf:/etc/conf.d/default.conf
+    depends_on:
+      - api
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      -  "3306:3306"
+    volumes:
+      # -  ./docker/mysql/sql:/var/lib/mysql
+      -  ./docker/mysql/my_conf:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: laravel_project
