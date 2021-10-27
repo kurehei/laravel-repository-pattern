@@ -22,6 +22,11 @@ class PostController extends Controller
     }
 
     public function index() {
-        var_dump($this->Post->getAll());
+        return response()->json($this->Post->getAll());
+    }
+
+    public function show(Request $request) {
+
+        return response()->json($this->Post->getPostById((int)$request->id));//$this->Post->getPostById((int)$request->id);
     }
 }

@@ -15,7 +15,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             \App\Repositories\Post\PostDataAccessRepositoryInterface::class,
-            \App\Repositories\Post\PostDataAccessQBRepository::class
+            \App\Repositories\Post\PostDataAccessEQRepository::class
         );
     }
 
