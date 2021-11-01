@@ -16,5 +16,5 @@ interface PostDataAccessRepositoryInterface {
    * @param integer $id
    * @return Post
    */
-  public function getPostById(int $id): Post;
+  public function getPostById(int $id): object;
 }

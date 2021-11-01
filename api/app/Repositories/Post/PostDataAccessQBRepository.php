@@ -6,11 +6,11 @@ use App\Entities\Post;
 
 class PostDataAccessQBRepository implements PostDataAccessRepositoryInterface{
 
-  protected $table = 'users';
-
   public function getAll() {
-    return DB::table('posts')->get()->map(function($post) {
-      return new Post($post->id, $post->name, $post->detail);
-    });
+    return DB::table('posts')->get();
+  }
+
+  public function getPostById(int $id): object {
+    return DB::table('posts')->where('id', $id)->first();
   }
 }
