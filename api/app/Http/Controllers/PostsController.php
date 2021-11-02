@@ -5,27 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Post\PostDataAccessRepositoryInterface AS PostDataAccess;
 
-class PostController extends Controller
+class PostsController extends Controller
 {
     /**
      * @var $Post
      */
-    protected $post;
+    protected $Post;
 
     /**
      *
      * @param PostDataAccess $PostDataAccess
      */
-    public function __construct(PostDataAccess $postDataAccess)
+    public function __construct(PostDataAccess $PostDataAccess)
     {
-        $this->post = $postDataAccess;
+        $this->Post = $PostDataAccess;
     }
 
     public function index() {
-        return $this->post->getAll();
+        //return response()->json($this->Post->getAll());
     }
 
     public function show(Request $request) {
-        return response()->json($this->post->getPostById((int)$request->id));
+        return response()->json($this->Post->getPostById((int)$request->id);
     }
 }
