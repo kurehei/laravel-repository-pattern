@@ -10,22 +10,22 @@ class PostsController extends Controller
     /**
      * @var $Post
      */
-    protected $Post;
+    protected $post;
 
     /**
      *
      * @param PostDataAccess $PostDataAccess
      */
-    public function __construct(PostDataAccess $PostDataAccess)
+    public function __construct(PostDataAccess $postDataAccess)
     {
-        $this->Post = $PostDataAccess;
+        $this->post = $postDataAccess;
     }
 
     public function index() {
-        //return response()->json($this->Post->getAll());
+        return $this->post->getAll();
     }
 
     public function show(Request $request) {
-        return response()->json($this->Post->getPostById((int)$request->id);
+        return response()->json($this->post->getPostById((int)$request->id));
     }
 }
