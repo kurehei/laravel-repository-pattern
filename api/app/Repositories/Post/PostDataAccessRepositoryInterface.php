@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories\Post;
-
 use Illuminate\Support\Collection;
 
 interface PostDataAccessRepositoryInterface {
@@ -17,4 +16,6 @@ interface PostDataAccessRepositoryInterface {
    * @return Post
    */
   public function getPostById(int $id): object;
+
+  public function createPostData($post): void;
 }

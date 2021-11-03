@@ -28,4 +28,13 @@ class PostsController extends Controller
     public function show(Request $request) {
         return response()->json($this->post->getPostById((int)$request->id));
     }
+
+    public function store(Request $request) {
+        try {
+          $this->post->createPostData($request->post);
+          return response()->json(['message' => "保存しました"]);
+        } catch (\Exception $e) {
+          return response()->json($e->getMessage());
+        }
+    }
 }
