@@ -56,13 +56,4 @@ class PostsController extends Controller
         }
         return response()->json(['message' => "削除しました"]);
     }
-
-    public function store(Request $request) {
-        try {
-          $this->post->createPostData($request);
-          return response()->json(['message' => "保存しました"]);
-        } catch (\Exception $e) {
-          return response()->json($e->getMessage());
-        }
-    }
 }
