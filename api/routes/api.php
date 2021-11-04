@@ -20,4 +20,5 @@ Route::group(['prefix' => 'posts'], function() {
     Route::put('{id}/update', 'App\Http\Controllers\Api\PostsController@update');
     Route::get('{id}', 'App\Http\Controllers\Api\PostsController@show');
     Route::delete('{id}/delete', 'App\Http\Controllers\Api\PostsController@delete');
+    Route::get('{id}', 'App\Http\Controllers\Api\PostsController@show');
 });

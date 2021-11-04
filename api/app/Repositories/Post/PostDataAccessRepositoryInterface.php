@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories\Post;
-
 use Illuminate\Support\Collection;
 
 interface PostDataAccessRepositoryInterface {
@@ -30,4 +29,6 @@ interface PostDataAccessRepositoryInterface {
   public function updatePostData($post): void;
 
   public function deletePostData($post): void;
+
+  public function createPostData($post): void;
 }

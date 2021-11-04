@@ -20,7 +20,7 @@ class PostDataAccessQBRepository implements PostDataAccessRepositoryInterface{
       'detail' => $post->detail
     ]);
   }
-
+  
   public function updatePostData($post): void {
     DB::table('posts')
       ->where('id', $post->id)

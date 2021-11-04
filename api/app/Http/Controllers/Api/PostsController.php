@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Repositories\Post\PostDataAccessRepositoryInterface AS PostDataAccess;
 
-class PostController extends Controller
+class PostsController extends Controller
 {
     /**
      * @var $Post
@@ -54,5 +55,14 @@ class PostController extends Controller
           return response()->json($e->getMessage());
         }
         return response()->json(['message' => "削除しました"]);
+    }
+
+    public function store(Request $request) {
+        try {
+          $this->post->createPostData($request);
+          return response()->json(['message' => "保存しました"]);
+        } catch (\Exception $e) {
+          return response()->json($e->getMessage());
+        }
     }
 }
