@@ -26,6 +26,33 @@ class PostController extends Controller
     }
 
     public function show(Request $request) {
-        return response()->json($this->post->getPostById((int)$request->id));
+        return $this->post->getPostById((int)$request->id);
+    }
+
+    public function store(Request $request) {
+        try {
+          $this->post->createPostData($request);
+        } catch (\Exception $e) {
+          return response()->json($e->getMessage());
+        }
+        return response()->json(['message' => "保存しました"]);
+    }
+
+    public function update(Request $request) {
+        try {
+          $this->post->updatePostData($request);
+        } catch (\Exception $e) {
+          return response()->json($e->getMessage());
+        }
+        return response()->json(['message' => "更新しました"]);
+    }
+
+    public function delete(Request $request) {
+        try {
+          $this->post->deletePostData($request);
+        } catch (\Exception $e) {
+          return response()->json($e->getMessage());
+        }
+        return response()->json(['message' => "削除しました"]);
     }
 }
