@@ -17,5 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'posts'], function() {
     Route::get('index', 'App\Http\Controllers\Api\PostsController@index');
     Route::post('store', 'App\Http\Controllers\Api\PostsController@store');
+    Route::put('{id}/update', 'App\Http\Controllers\Api\PostsController@update');
+    Route::get('{id}', 'App\Http\Controllers\Api\PostsController@show');
+    Route::delete('{id}/delete', 'App\Http\Controllers\Api\PostsController@delete');
     Route::get('{id}', 'App\Http\Controllers\Api\PostsController@show');
 });

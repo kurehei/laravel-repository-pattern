@@ -16,6 +16,19 @@ interface PostDataAccessRepositoryInterface {
    * @return Post
    */
   public function getPostById(int $id): object;
+  /**
+   *
+   * @param [type] $post
+   * @return void
+   */
+  public function createPostData($post): void;
+
+  /**
+   *
+   */
+  public function updatePostData($post): void;
+
+  public function deletePostData($post): void;
 
   public function createPostData($post): void;
 }
