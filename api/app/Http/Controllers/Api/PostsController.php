@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Post\PostDataAccessRepositoryInterface AS PostDataAccess;
+use App\Services\Posts\PostServiceInterface;
 
 class PostsController extends Controller
 {
@@ -15,11 +16,20 @@ class PostsController extends Controller
 
     /**
      *
+     * @param PostServiceInterface $postService
+     */
+    protected $postService;
+
+    /**
+     *
      * @param PostDataAccess $PostDataAccess
      */
-    public function __construct(PostDataAccess $postDataAccess)
+    public function __construct(
+        PostDataAccess $postDataAccess,
+        PostServiceInterface $postService)
     {
         $this->post = $postDataAccess;
+        $this->postService = $postService;
     }
 
     public function index() {
@@ -31,12 +41,7 @@ class PostsController extends Controller
     }
 
     public function store(Request $request) {
-        try {
-          $this->post->createPostData($request);
-        } catch (\Exception $e) {
-          return response()->json($e->getMessage());
-        }
-        return response()->json(['message' => "保存しました"]);
+        return response()->json(['message' => $this->postService->savePost($request)]);
     }
 
     public function update(Request $request) {
