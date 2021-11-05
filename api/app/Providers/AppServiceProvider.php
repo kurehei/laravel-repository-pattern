@@ -13,7 +13,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            \App\Services\Posts\PostServiceInterface::class,
+            function ($app) {
+                return new \App\Services\Posts\PostService(
+                    $app->make(\App\Repositories\Post\PostDataAccessRepositoryInterface::class)
+                );
+            },
+        );
     }
 
     /**
