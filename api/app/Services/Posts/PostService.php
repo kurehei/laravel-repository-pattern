@@ -2,7 +2,9 @@
 
 namespace App\Services\Posts;
 
+use DB;
 use App\Repositories\Post\PostDataAccessRepositoryInterface AS PostDataAccess;
+use \App\Repositories\Tag\TagDataAccessRepositoryInterface AS TagDataAccess;
 
 class PostService implements PostServiceInterface
 {
@@ -10,19 +12,34 @@ class PostService implements PostServiceInterface
      * @var $Post
      */
     protected $post;
+
+    protected $tag;
     /**
      *
-     * @param PostDataAccess $PostDataAccess
+     * @param PostDataAccess $postDataAccess
      */
-    public function __construct(PostDataAccess $postDataAccess)
+    public function __construct(
+    PostDataAccess $postDataAccess,
+    TagDataAccess $tagDataAccess
+    )
     {
         $this->post = $postDataAccess;
+        $this->tag = $tagDataAccess;
     }
 
-    public function savePost($post) {
+    public function savePost($post, $tags) {
+      DB::beginTransaction();
       try {
         $this->post->createPostData($post);
+        $latestPostData = $this->post->getLatestPostData();
+
+        foreach($tags as $tag) {
+          $this->tag->create($tag["name"], $latestPostData->id);
+        }
+
+        DB::commit();
       } catch (\Exception $e) {
+        DB::rollback();
         return $e->getMessage();
       }
       return $message = "保存しました";

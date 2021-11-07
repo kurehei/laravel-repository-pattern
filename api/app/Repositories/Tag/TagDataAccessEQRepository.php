@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\Post;
+namespace App\Repositories\Tag;
 use App\Models\Tag;
 
 class TagDataAccessEQRepository implements TagDataAccessRepositoryInterface {
- 
-  public function create($tag): void {
+
+  public function create($tagName, $postId) {
     Tag::create([
-      'name' => $tag->name,
-      'post_id' => $tag->post_id
+      'name' => $tagName,
+      'post_id' => $postId
     ]);
   }
 }

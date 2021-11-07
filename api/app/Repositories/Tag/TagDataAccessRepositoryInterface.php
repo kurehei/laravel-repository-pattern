@@ -8,5 +8,5 @@ interface TagDataAccessRepositoryInterface {
    *
    * @return void
    */
-  public function create($tag): void;
+  public function create($tagName, $postId);
 }

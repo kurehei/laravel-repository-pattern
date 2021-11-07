@@ -11,5 +11,9 @@ class Post extends Model
 
     protected $table = "posts";
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
+
+    public function tags() {
+        return $this->hasMany(Tag::class);
+    }
 }
