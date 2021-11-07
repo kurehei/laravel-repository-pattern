@@ -4,5 +4,5 @@ namespace App\Services\Posts;
 
 interface PostServiceInterface
 {
-    public function savePost($post);
+    public function savePost($post, $tags);
 }
