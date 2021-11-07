@@ -16,11 +16,11 @@ class PostDataAccessQBRepository implements PostDataAccessRepositoryInterface{
 
   public function createPostData($post): void {
     DB::table('posts')->insert([
-      'name' => $post->name,
-      'detail' => $post->detail
+      'name' => $post["name"],
+      'detail' => $post["detail"]
     ]);
   }
-  
+
   public function updatePostData($post): void {
     DB::table('posts')
       ->where('id', $post->id)
@@ -34,5 +34,9 @@ class PostDataAccessQBRepository implements PostDataAccessRepositoryInterface{
     DB::table('posts')
       ->where('id', $post->id)
       ->delete();
+  }
+
+  public function getLatestPostData() {
+    return DB::table('posts')->orderBy('id', 'desc')->first();
   }
 }
