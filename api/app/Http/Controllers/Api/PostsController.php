@@ -41,7 +41,7 @@ class PostsController extends Controller
     }
 
     public function store(Request $request) {
-        return response()->json(['message' => $this->postService->savePost($request)]);
+        return response()->json(['message' => $this->postService->savePost($request->post, $request->post["tag"])]);
     }
 
     public function update(Request $request) {
