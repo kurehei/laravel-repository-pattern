@@ -44,4 +44,22 @@ class PostService implements PostServiceInterface
       }
       return $message = "保存しました";
     }
+
+    public function updatePost($post, $tags) {
+      DB::beginTransaction();
+      try {
+        $this->post->updatePostData($post);
+        $latestPostData = $this->post->getLatestPostData();
+
+        foreach($tags as $tag) {
+          $this->tag->update($tag["name"], $latestPostData->id);
+        }
+
+        DB::commit();
+      } catch (\Exception $e) {
+        DB::rollback();
+        return $e->getMessage();
+      }
+      return $message = "更新しました";
+    }
 }
