@@ -9,4 +9,5 @@ interface TagDataAccessRepositoryInterface {
    * @return void
    */
   public function create($tagName, $postId);
+  public function update($tagName, $postId);
 }

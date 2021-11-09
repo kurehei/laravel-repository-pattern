@@ -11,4 +11,11 @@ class TagDataAccessEQRepository implements TagDataAccessRepositoryInterface {
       'post_id' => $postId
     ]);
   }
+
+  public function update($tagName, $postId) {
+    Tag::update([
+      'name' => $tagName,
+      'post_id' => $postId
+    ]);
+  }
 }
