@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Post\PostDataAccessRepositoryInterface AS PostDataAccess;
 use App\Services\Posts\PostServiceInterface;
+use App\Http\Resources\PostResource;
 
 class PostsController extends Controller
 {
@@ -37,7 +38,7 @@ class PostsController extends Controller
     }
 
     public function show(Request $request) {
-        return $this->post->getPostById((int)$request->id);
+        return new PostResource($this->post->getPostById((int)$request->id));
     }
 
     public function store(Request $request) {
