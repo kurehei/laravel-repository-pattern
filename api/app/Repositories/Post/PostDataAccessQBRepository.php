@@ -10,8 +10,9 @@ class PostDataAccessQBRepository implements PostDataAccessRepositoryInterface{
     return DB::table('posts')->get();
   }
 
-  public function getPostById(int $id): object {
-    return DB::table('posts')->where('id', $id)->first();
+  public function getPostById(int $id) {
+    $post = DB::table('posts')->where('id', $id)->first();
+    return new Post($post->id, $post->name, $post->detail);
   }
 
   public function createPostData($post): void {
