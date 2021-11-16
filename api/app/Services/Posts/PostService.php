@@ -62,4 +62,9 @@ class PostService implements PostServiceInterface
       }
       return $message = "更新しました";
     }
+
+    public function getPostDataWithTagList($id): array {
+      $post = $this->post->getPostById($id);
+      return ['post' => [$post, "tags" => $this->tag->getTagListByPostId($post->getId())]];
+    }
 }
