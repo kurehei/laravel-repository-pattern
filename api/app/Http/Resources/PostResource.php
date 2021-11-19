@@ -14,10 +14,12 @@ class PostResource extends JsonResource
      */
     public function toArray($request)
     {
+        $post = $this[0];
+        $tags = $this["tags"];
         return [
-            'id' => $this->getId(),
-            'name' => $this->getName(),
-            'email' => $this->getDetail(),
+            'id' => $post->getId(),
+            'name' => $post->getName(),
+            'email' => $post->getDetail(),
         ];
     }
 }
