@@ -16,6 +16,7 @@ class PostResource extends JsonResource
     {
         $post = $this[0];
         $tags = $this["tags"];
+        
         return [
             'id' => $post->getId(),
             'name' => $post->getName(),
