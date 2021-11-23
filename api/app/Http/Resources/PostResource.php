@@ -15,12 +15,21 @@ class PostResource extends JsonResource
     public function toArray($request)
     {
         $post = $this[0];
-        $tags = $this["tags"];
-        
         return [
             'id' => $post->getId(),
             'name' => $post->getName(),
             'email' => $post->getDetail(),
+            'tags' => $this->expandTagList($this["tags"])
         ];
+    }
+
+    public function expandTagList(array $tagList): array {
+        return array_map(function($tag) {
+            return [
+                'id' => $tag->getId(),
+                'name' => $tag->getName(),
+                'postId' => $tag->getPostId()
+            ];
+        }, $tagList);
     }
 }

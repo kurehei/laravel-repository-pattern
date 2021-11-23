@@ -38,7 +38,7 @@ class PostsController extends Controller
     }
 
     public function show(Request $request) {
-        return new PostResource($this->post->getPostById((int)$request->id));
+        return new PostResource($this->postService->getPostDataWithTagList((int)$request->id));
     }
 
     public function store(Request $request) {
