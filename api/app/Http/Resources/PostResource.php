@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Collection;
 
 class PostResource extends JsonResource
 {
@@ -15,22 +16,21 @@ class PostResource extends JsonResource
     public function toArray($request)
     {
         $post = $this[0];
-        // $tags = $this["tags"];
         return [
             'id' => $post->getId(),
             'name' => $post->getName(),
             'email' => $post->getDetail(),
-            'tags' => $this->expandTagList($this["tags"])
+            'tags' => self::expandTagList($this["tags"])
         ];
     }
 
-    public function expandTagList(array $tagList): array {
-        return array_map(function($tag) {
+    protected static function expandTagList(Collection $tagList): Collection {
+        return $tagList->map(function($tag) {
             return [
                 'id' => $tag->getId(),
                 'name' => $tag->getName(),
                 'postId' => $tag->getPostId()
             ];
-        }, $tagList);
+        });
     }
 }
