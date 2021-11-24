@@ -25,7 +25,7 @@ class PostResource extends JsonResource
     }
 
     protected static function expandTagList(Collection $tagList): Collection {
-        return $tagList->map(function($tag) {
+        return $tagList->map(function($tag): array {
             return [
                 'id' => $tag->getId(),
                 'name' => $tag->getName(),
