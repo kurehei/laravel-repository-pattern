@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Repositories\Tag;
+
 use App\Models\Tag;
+use Illuminate\Support\Collection;
 use App\Entities\Tag as TagEntity;
 
 class TagDataAccessEQRepository implements TagDataAccessRepositoryInterface {
@@ -20,7 +22,7 @@ class TagDataAccessEQRepository implements TagDataAccessRepositoryInterface {
     ]);
   }
 
-  public function getTagListByPostId(int $postId) {
+  public function getTagListByPostId(int $postId): Collection {
     $tagList = Tag::where('post_id', $postId)->get();
     return $tagList->map(function ($tag) {
       return new TagEntity($tag->id, $tag->name, $tag->post_id);

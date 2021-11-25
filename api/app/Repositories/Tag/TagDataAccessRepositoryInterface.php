@@ -10,5 +10,5 @@ interface TagDataAccessRepositoryInterface {
    */
   public function create($tagName, $postId);
   public function update($tagName, $postId);
-  public function getTagListByPostId(int $postId);
+  public function getTagListByPostId(int $postId): Collection;
 }
