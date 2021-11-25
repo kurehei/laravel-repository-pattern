@@ -7,7 +7,9 @@ use App\Entities\Post;
 class PostDataAccessQBRepository implements PostDataAccessRepositoryInterface{
 
   public function getAll() {
-    return DB::table('posts')->get();
+    return DB::table('posts')->get()->map(function($post) {
+      return new Post($post->id, $post->name, $post->detail);
+    });
   }
 
   public function getPostById(int $id) {

@@ -67,4 +67,11 @@ class PostService implements PostServiceInterface
       $post = $this->post->getPostById($id);
       return [$post, "tags" => $this->tag->getTagListByPostId($post->getId())];
     }
+
+    public function getAllPostWithTagList(): array {
+      return $this->post->getAll()->map(function($post) {
+        return [$post, "tags" => $this->tag->getTagListByPostId($post->getId())];
+      });
+
+    }
 }
