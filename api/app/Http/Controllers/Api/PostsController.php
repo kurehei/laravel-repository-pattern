@@ -34,7 +34,9 @@ class PostsController extends Controller
     }
 
     public function index() {
-        return $this->postService->getAllPostWithTagList();
+        return $this->postService->getAllPostWithTagList()->map(function($post) {
+          return new PostResource($post);
+        });
     }
 
     public function show(Request $request) {
