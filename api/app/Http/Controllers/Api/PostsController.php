@@ -53,6 +53,7 @@ class PostsController extends Controller
         } catch (\Exception $e) {
           return response()->json($e->getMessage());
         }
+        
         return response()->json(['message' => "更新しました"]);
     }
 
