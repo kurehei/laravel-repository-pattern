@@ -21,3 +21,7 @@ Route::group(['prefix' => 'posts'], function() {
     Route::get('{id}', 'App\Http\Controllers\Api\PostsController@show');
     Route::delete('{id}/delete', 'App\Http\Controllers\Api\PostsController@delete');
 });
+
+Route::group(['prefix' => 'tags'], function() {
+    Route::post('store', 'App\Http\Controllers\Api\TagsController@store');
+});
