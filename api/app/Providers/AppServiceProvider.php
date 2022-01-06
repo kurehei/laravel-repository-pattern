@@ -23,6 +23,15 @@ class AppServiceProvider extends ServiceProvider
             },
         );
 
+        $this->app->bind(
+            \App\Services\Tags\TagServiceInterface::class,
+            function ($app) {
+                return new \App\Services\Tags\TagService(
+                    $app->make(\App\Repositories\Tag\TagDataAccessRepositoryInterface::class)
+                );
+            },
+        );
+
         $this->app->bind(\App\Repositories\Tag\TagDataAccessRepositoryInterface::class, \App\Repositories\Tag\TagDataAccessEQRepository::class);
     }
 

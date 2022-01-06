@@ -8,7 +8,7 @@ use App\Entities\Tag as TagEntity;
 
 class TagDataAccessEQRepository implements TagDataAccessRepositoryInterface {
 
-  public function create($tagName, $postId) {
+  public function create($tagName, $postId = 0) {
     Tag::create([
       'name' => $tagName,
       'post_id' => $postId
